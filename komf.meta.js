@@ -1,14 +1,11 @@
 // ==UserScript==
-// @name         Komf
+// @name         Komf-Wing
 // @namespace    https://github.com/Snd-R/komf-userscript
 // @version      0.11.1
 // @description  Komf userscript
 // @author       snd-r
-// @include      http://localhost:8080/*
-// @include      http://localhost:5000/*
+// @include      https://mac.suamo.art:8098/*
+// @include      https://mac.suamo.art:10030/*
 // @grant        none
 // @run-at       document-body
-// @updateURL    https://raw.githubusercontent.com/Snd-R/komf-userscript/main/komf.meta.js
-// @downloadURL  https://github.com/Snd-R/komf-userscript/releases/latest/download/komf.user.js
-
 // ==/UserScript==
