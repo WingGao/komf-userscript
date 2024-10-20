@@ -1,5 +1,6 @@
 <template>
-  <q-menu class="text-body2 text-weight-medium">
+  <q-btn icon="mdi-auto-fix" flat rounded padding="0.85em" @click="promptIdentifySeries" v-if="auto" />
+  <q-menu v-else class="text-body2 text-weight-medium">
     <q-item clickable @click="promptIdentifySeries" v-close-popup>
       <q-item-section no-wrap>Identify</q-item-section>
     </q-item>
@@ -19,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject, ref } from 'vue'
+import { inject, ref, watchEffect } from 'vue'
 import type KomfMetadataService from '../services/komf-metadata.service'
 import ConfirmationDialog from '@/components/ConfirmationDialog.vue'
 import IdentifySeriesDialog from '@/components/IdentifySeriesDialog.vue'
@@ -35,9 +36,15 @@ const settings = useSettingsStore()
 
 const loading = ref(false)
 
+const props = defineProps(['auto'])
+watchEffect(() =>{
+  console.log(props.auto)
+})
+
 function seriesTitle() {
-    if (settings.mediaServer == MediaServer.Komga) {
-        return (
+  let sTitle
+  if (settings.mediaServer == MediaServer.Komga) {
+     sTitle=  (
             (
                 document.querySelector('.v-main__wrap .v-toolbar__content .v-toolbar__title span') ||
                 document.querySelector('.v-main__wrap .container--fluid .container span.text-h6')
@@ -45,8 +52,13 @@ function seriesTitle() {
         ).innerText
     }
     else
-        return (document.querySelector('app-series-detail .info-container div h4 span') as HTMLElement).innerText
+    sTitle= (document.querySelector('app-series-detail .info-container div h4 span') as HTMLElement).innerText
+
+  // 提取标题
+  sTitle = sTitle.replaceAll(/(\([^)]+\))|(\[[^\]]+])/ig,' ')
+  return sTitle
 }
+
 
 function seriesId() {
     let path = window.location.pathname.split('/')

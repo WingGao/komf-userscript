@@ -6,6 +6,7 @@
   >
     <SeriesActionsMenu />
   </q-btn>
+  <SeriesActionsMenu :auto="true" />
 </template>
 
 <script setup lang="ts">import SeriesActionsMenu from '@/components/SeriesActionsMenu.vue'</script>

@@ -18,3 +18,15 @@ Requires tampermonkey or any other supported userscript manager.
 - Import the file into script manager
 - Set `@include`  to your komga or kavita server url (or both)
 - Set `komf url` in Komf settings from Komga or Kavita UI
+
+
+
+### 如何测试
+```js
+// 在komg页面直接运行
+const script = document.createElement('script');
+script.type='module';
+script.src = 'http://localhost:5173/src/main.ts';
+script.onload = () => console.log('Script loaded successfully!');
+document.head.appendChild(script);
+```
